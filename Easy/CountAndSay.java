@@ -37,5 +37,5 @@ public class CountAndSay {
 }
 
 /*
-Remember to use double loop, one is calculating each result, one is calculating the whole sequence.
+Remember to use double loop, second one is reading off the last letter in previous result.
 */
