@@ -20,29 +20,37 @@ O(n) Space, O(n) Time
 */
 
 public class Solution {
+	//unsorted array, O(n)suntime, O(n)space 
 	public int[] twoSum(int[] numbers, int target) {
-	    if(numbers == null || numbers.length < 2) { 	//checking for null and one-element array
-	    	return null;
-	    }               
-	    HashMap<Integer, Integer> hashmap = new HashMap<Integer, Integer>();
-	    for(int i=0; i<numbers.length; i++){
-	        hashmap.put(numbers[i], i+1); 	// key: number, value: index
-	    }       
-	        
-	    int[] index = new int[2];
-	        
-	    for(int i=0; i<numbers.length ; i++){
-	        if ( hashmap.containsKey( target - numbers[i] )){
-	            int index1 = i+1;
-	            int index2 = hashmap.get(target - numbers[i]);
-	            if (index1 == index2){
-	                continue;
-	            }
-	            index[0] = index1;
-	            index[1] = index2;
-	            return index;
-	        }
-	    }
-	    return index;
+	   if(numbers==null || numbers.length<2) return null;
+        //hashtable, O(1) to search a value
+        HashMap<Integer,Integer> sums = new HashMap<>();
+        
+        for(int i=0;i<numbers.length;i++){
+            if(sums.containsKey(numbers[i])){
+                int index = sums.get(numbers[i])+1;
+                return new int[]{index,i+1};
+            }else{
+                sums.put(target-numbers[i],i);
+            }
+        }
+        
+        return null;
 	}
+	// sorted array O(n) runtime, O(1)space
+	/**
+             int i=0;
+             int j=numbers.length-1;
+             while(i<j){
+             	int sum = numbers[i]+numbers[j];
+             	if(sum == target){
+                   return new int[]{i+1,j+1};
+             	}else if (sum < target){
+             	   i++;
+             	}else{
+             	   j++;
+             	}
+             }
+             return null;
+ 	 * /
 }
